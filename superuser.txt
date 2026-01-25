@@ -1,0 +1,3 @@
+u:admin
+e:arthurgeorgekojo@gmail.com
+p:Password@12
