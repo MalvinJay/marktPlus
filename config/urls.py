@@ -18,15 +18,15 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from accounts.views import UserRegistrationView, UserProfileViewSet
-from dashboard.views import DashboardMetricViewSet
+from accounts.views import UserRegistrationView, UserProfileView
+from dashboard.views import DashboardViewSet
 from transactions.views import TransactionViewSet
 from reports.views import ReportViewSet
 
 router = DefaultRouter()
 router.register(r'users', UserRegistrationView, basename='user-registration')
-router.register(r'profiles', UserProfileViewSet, basename='user-profile')
-router.register(r'dashboard/metrics', DashboardMetricViewSet, basename='dashboard-metrics')
+router.register(r'profiles', UserProfileView, basename='user-profile')
+router.register(r'dashboard/metrics', DashboardViewSet, basename='dashboard-metrics')
 router.register(r'transactions', TransactionViewSet, basename='transaction')
 router.register(r'reports', TransactionViewSet, basename='report')
 

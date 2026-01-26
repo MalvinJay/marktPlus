@@ -3,7 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import DashboardMetric
-from .serializers import DashboardDataSerializer
+from .serializers import DashboardMetricSerializer
 from transactions.models import Transaction
 from django.db.models import Sum, Count, Q
 from django.utils import timezone
@@ -11,7 +11,7 @@ from datetime import timedelta
 
 # Create your views here.
 class DashboardViewSet(viewsets.ViewSet):
-    serializer_class = DashboardDataSerializer
+    serializer_class = DashboardMetricSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
