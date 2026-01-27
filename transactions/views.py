@@ -20,6 +20,23 @@ class TransactionViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+    # Get all transactions for the authenticated user 
+    @action(detail=False, methods=['get'])
+    def Index(self, request):
+        transactions = self.get_queryset().all()
+        serializer = self.get_serializer(transactions, many=True)
+        return Response(serializer.data)
+
+    # Create a new transaction
+    @action(detail=False, methods=['post'])
+    def Index(self, request):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "Transaction successful"}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # Get transactions by status
     @action(detail=False, methods=['get'])
     def by_status(self, request):
         status_filter = request.query_params.get('status')
@@ -29,6 +46,7 @@ class TransactionViewSet(viewsets.ModelViewSet):
             return Response(serializer.data)
         return Response({'error': 'Status parameter required'}, status=status.HTTP_400_BAD_REQUEST)
 
+    # Update transaction status
     @action(detail=True, methods=['patch'])
     def update_status(self, request, pk=None):
         transaction = self.get_object()

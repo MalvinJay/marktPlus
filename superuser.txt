@@ -1,3 +1,7 @@
-u:admin
+su:admin
 e:arthurgeorgekojo@gmail.com
 p:Password@12
+
+u:MalvinJay
+e:malvinarthur12@gmail.com
+p:Qwertypoiu
