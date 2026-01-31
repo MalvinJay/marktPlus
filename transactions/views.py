@@ -46,6 +46,16 @@ class TransactionViewSet(viewsets.ModelViewSet):
             return Response(serializer.data)
         return Response({'error': 'Status parameter required'}, status=status.HTTP_400_BAD_REQUEST)
 
+    # Update transaction 
+    @action(detail=True, methods=['put'])
+    def Index(self, request, pk=None):
+        transaction = request.user.transactions.get(pk=pk)
+        serializer = self.get_serializer(transaction, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
     # Update transaction status
     @action(detail=True, methods=['patch'])
     def update_status(self, request, pk=None):
